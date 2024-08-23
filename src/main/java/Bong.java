@@ -47,6 +47,8 @@ public class Bong {
                     handleDeadlineTask(list, userInput.substring(9).trim());
                 } else if (userInput.startsWith("event ")) {
                     handleEventTask(list, userInput.substring(6).trim());
+                } else if (userInput.startsWith("delete ")) {
+                    handleDeleteTask(list, userInput.substring(7).trim());
                 } else {
                     throw new BongException("I'm sorry, I don't understand that command.");
                 }
@@ -140,11 +142,29 @@ public class Bong {
         }
     }
 
+    private static void handleDeleteTask(ArrayList<Task> list, String input) throws BongException {
+        try {
+            int taskNumber = Integer.parseInt(input.trim()) - 1;
+            if (taskNumber >= 0 && taskNumber < list.size()) {
+                Task removedTask = list.remove(taskNumber);
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Noted. I've removed this task:");
+                System.out.println("       " + removedTask);
+                System.out.println("     Now you have " + list.size() + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
+            } else {
+                throw new BongException("Invalid task number!");
+            }
+        } catch (NumberFormatException e) {
+            throw new BongException("Please provide a valid task number.");
+        }
+    }
+
     private static void addedTaskMsg(Task task, int listSize) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
         System.out.println("       " + task);
-        System.out.println("     Now you have " + listSize+ " tasks in the list.");
+        System.out.println("     Now you have " + listSize + " tasks in the list.");
         System.out.println("    ____________________________________________________________");
     }
 }
