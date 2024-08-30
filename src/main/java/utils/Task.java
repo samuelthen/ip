@@ -4,9 +4,9 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public void markAsDone() {
@@ -25,4 +25,8 @@ public abstract class Task {
 
     @Override
     public abstract String toString(); // to be implemented by subclasses
+
+    public String toFileString() {
+        return (isDone ? "1" : "0") + " | " + description;
+    }
 }
