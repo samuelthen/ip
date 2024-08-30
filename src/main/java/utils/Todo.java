@@ -1,8 +1,8 @@
 package utils;
 
 public class Todo extends Task {
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     @Override
@@ -13,6 +13,11 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return getTypeIcon() + getStatusIcon() + " " + description;
+    }
+
+    @Override
+    public String toFileString() {
+        return "T | " + super.toFileString();
     }
 }
 
