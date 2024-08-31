@@ -1,4 +1,4 @@
-package utils;
+package bong.task;
 
 public class Todo extends Task {
     public Todo(String description, boolean isDone) {

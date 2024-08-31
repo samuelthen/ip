@@ -1,4 +1,4 @@
-package utils;
+package bong.task;
 
 public abstract class Task {
     protected String description;

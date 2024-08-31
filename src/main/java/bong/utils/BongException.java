@@ -1,4 +1,4 @@
-package utils;
+package bong.utils;
 
 public class BongException extends Exception {
     public BongException(String message) {
