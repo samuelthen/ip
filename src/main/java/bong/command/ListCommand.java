@@ -1,9 +1,9 @@
 package bong.command;
 
+import java.util.ArrayList;
+
 import bong.task.Task;
 import bong.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to list all tasks in the task list.

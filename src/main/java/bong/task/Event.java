@@ -1,9 +1,9 @@
 package bong.task;
 
-import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents an event task with a specific start and end time in the Bong application.
@@ -64,7 +64,6 @@ public class Event extends Task {
                 // If parsing fails, continue to try the next format
             }
         }
-
         throw new IllegalArgumentException("Invalid date format: " + by);
     }
 

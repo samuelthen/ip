@@ -1,16 +1,16 @@
 package bong.task;
 
-import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a task with a specific deadline in the Bong application.
  * Inherits from the {@code Task} class.
  */
 public class Deadline extends Task {
-    private LocalDateTime by;
+    private final LocalDateTime by;
 
     private static final DateTimeFormatter[] FORMATTERS = {
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // e.g., "31/12/2023 2359"
@@ -61,7 +61,6 @@ public class Deadline extends Task {
                 // If parsing fails, continue to try the next format
             }
         }
-
         throw new IllegalArgumentException("Invalid date format: " + by);
     }
 
