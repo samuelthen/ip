@@ -1,8 +1,8 @@
 package bong.task;
 
-import bong.utils.BongException;
-
 import java.util.ArrayList;
+
+import bong.utils.BongException;
 
 public class TaskList {
     private ArrayList<Task> tasks;

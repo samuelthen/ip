@@ -1,13 +1,15 @@
 package bong.task;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import bong.utils.BongException;
 
 import java.util.ArrayList;
+
+import bong.utils.BongException;
 
 public class TaskListTest {
 

@@ -1,6 +1,13 @@
 package bong.utils;
 
-import bong.command.*;
+import bong.command.AddCommand;
+import bong.command.Command;
+import bong.command.DeleteCommand;
+import bong.command.ExitCommand;
+import bong.command.ListCommand;
+import bong.command.MarkCommand;
+import bong.command.UnmarkCommand;
+
 import bong.task.Deadline;
 import bong.task.Event;
 import bong.task.Todo;
@@ -11,37 +18,45 @@ public class Parser {
         String commandWord = parts[0].toLowerCase();
         String arguments = parts.length > 1 ? parts[1] : "";
 
-        if (commandWord.equals("bye")) {
-            return new ExitCommand();
-        } else if (commandWord.equals("list")) {
-            return new ListCommand();
-        } else if (commandWord.equals("mark")) {
-            return new MarkCommand(arguments);
-        } else if (commandWord.equals("unmark")) {
-            return new UnmarkCommand(arguments);
-        } else if (commandWord.equals("delete")) {
-            return new DeleteCommand(arguments);
-        } else if (commandWord.equals("todo")) {
-            return new AddCommand(new Todo(arguments, false));
-        } else if (commandWord.equals("deadline")) {
-            String[] subparts = arguments.split(" /by ");
-            String taskDescription = subparts[0].trim();
-            if (taskDescription.isEmpty()) {
-                throw new BongException("The description of a deadline cannot be empty.");
+        switch (commandWord) {
+            case "bye" -> {
+                return new ExitCommand();
             }
-            String by = subparts[1].trim();
-            return new AddCommand(new Deadline(taskDescription, by, false));
-        } else if (commandWord.equals("event")) {
-            String[] subparts = arguments.split(" /from | /to ");
-            String taskDescription = subparts[0].trim();
-            if (taskDescription.isEmpty()) {
-                throw new BongException("The description of an event cannot be empty.");
+            case "list" -> {
+                return new ListCommand();
             }
-            String from = subparts[1].trim();
-            String to = subparts[2].trim();
-            return new AddCommand(new Event(taskDescription, from, to, false));
-        } else {
-            throw new BongException("I'm sorry, I don't understand that command.");
+            case "mark" -> {
+                return new MarkCommand(arguments);
+            }
+            case "unmark" -> {
+                return new UnmarkCommand(arguments);
+            }
+            case "delete" -> {
+                return new DeleteCommand(arguments);
+            }
+            case "todo" -> {
+                return new AddCommand(new Todo(arguments, false));
+            }
+            case "deadline" -> {
+                String[] subparts = arguments.split(" /by ");
+                String taskDescription = subparts[0].trim();
+                if (taskDescription.isEmpty()) {
+                    throw new BongException("The description of a deadline cannot be empty.");
+                }
+                String by = subparts[1].trim();
+                return new AddCommand(new Deadline(taskDescription, by, false));
+            }
+            case "event" -> {
+                String[] subparts = arguments.split(" /from | /to ");
+                String taskDescription = subparts[0].trim();
+                if (taskDescription.isEmpty()) {
+                    throw new BongException("The description of an event cannot be empty.");
+                }
+                String from = subparts[1].trim();
+                String to = subparts[2].trim();
+                return new AddCommand(new Event(taskDescription, from, to, false));
+            }
+            default -> throw new BongException("I'm sorry, I don't understand that command.");
         }
 
     }

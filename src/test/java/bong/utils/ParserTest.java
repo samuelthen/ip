@@ -1,17 +1,18 @@
 package bong.utils;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
+
+import bong.command.AddCommand;
 import bong.command.Command;
+import bong.command.DeleteCommand;
 import bong.command.ExitCommand;
 import bong.command.ListCommand;
 import bong.command.MarkCommand;
 import bong.command.UnmarkCommand;
-import bong.command.DeleteCommand;
-import bong.command.AddCommand;
-
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
 

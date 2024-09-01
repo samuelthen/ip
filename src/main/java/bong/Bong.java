@@ -1,19 +1,21 @@
 package bong;
 
-import bong.utils.BongException;
 import bong.command.Command;
 import bong.command.CommandResult;
+
+import bong.task.TaskList;
+
+import bong.utils.BongException;
 import bong.utils.Parser;
 import bong.utils.Storage;
-import bong.task.TaskList;
 import bong.utils.Ui;
 
 public class Bong {
     private static final String FILE_PATH = "./data/bong.txt"; // Hardcoded file path
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
 
     public Bong() {
         ui = new Ui();
