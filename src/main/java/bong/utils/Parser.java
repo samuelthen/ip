@@ -41,7 +41,7 @@ public class Parser {
             String to = subparts[2].trim();
             return new AddCommand(new Event(taskDescription, from, to, false));
         } else {
-            throw new BongException("I'm sorry, I don't understand that bong.command.");
+            throw new BongException("I'm sorry, I don't understand that command.");
         }
 
     }
