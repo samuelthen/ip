@@ -13,13 +13,27 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * The {@code Storage} class handles the loading and saving of tasks to and from a file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a new {@code Storage} object with the specified file path.
+     *
+     * @param filePath The path of the file where tasks will be saved and loaded.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return An {@code ArrayList} of tasks loaded from the file.
+     * @throws BongException If an error occurs while loading tasks from the file.
+     */
     public ArrayList<Task> load() throws BongException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
@@ -56,6 +70,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the given list of tasks to the storage file.
+     *
+     * @param list The {@code ArrayList} of tasks to save.
+     * @throws BongException If an error occurs while saving tasks to the file.
+     */
     public void save(ArrayList<Task> list) throws BongException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for (Task task : list) {

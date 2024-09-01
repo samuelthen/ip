@@ -5,7 +5,18 @@ import bong.task.Deadline;
 import bong.task.Event;
 import bong.task.Todo;
 
+/**
+ * The {@code Parser} class is responsible for parsing user input into commands
+ * that the Bong application can execute.
+ */
 public class Parser {
+    /**
+     * Parses the user input and returns the corresponding {@code Command} object.
+     *
+     * @param userInput The input string provided by the user.
+     * @return The {@code Command} object representing the user's command.
+     * @throws BongException If the user input cannot be parsed into a valid command.
+     */
     public Command parseCommand(String userInput) throws BongException {
         String[] parts = userInput.split(" ", 2);
         String commandWord = parts[0].toLowerCase();
@@ -43,6 +54,5 @@ public class Parser {
         } else {
             throw new BongException("I'm sorry, I don't understand that command.");
         }
-
     }
 }

@@ -5,7 +5,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends bong.task.Task {
+/**
+ * Represents a task with a specific deadline in the Bong application.
+ * Inherits from the {@code Task} class.
+ */
+public class Deadline extends Task {
     private LocalDateTime by;
 
     private static final DateTimeFormatter[] FORMATTERS = {
@@ -23,44 +27,69 @@ public class Deadline extends bong.task.Task {
 
     private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
+    /**
+     * Constructs a new {@code Deadline} task with the specified description, deadline, and status.
+     *
+     * @param description The description of the deadline task.
+     * @param by The deadline date and time for the task in string format.
+     * @param isDone Whether the task is marked as done.
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = parseDateTime(by);
     }
 
+    /**
+     * Parses the given date and time string into a {@code LocalDateTime} object.
+     *
+     * @param by The date and time string to be parsed.
+     * @return The parsed {@code LocalDateTime} object.
+     * @throws IllegalArgumentException If the input string does not match any known date format.
+     */
     private LocalDateTime parseDateTime(String by) {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
-                // Try parsing with date and time
                 return LocalDateTime.parse(by, formatter);
             } catch (DateTimeParseException e) {
-                // If it fails, continue to try the next format
+                // If parsing fails, continue to try the next format
             }
 
             try {
-                // Try parsing as LocalDate and convert to LocalDateTime at start of the day
                 LocalDate date = LocalDate.parse(by, formatter);
                 return date.atStartOfDay();
             } catch (DateTimeParseException e) {
-                // If it fails, continue to try the next format
+                // If parsing fails, continue to try the next format
             }
         }
 
-        // If all parsing attempts fail, throw an exception
         throw new IllegalArgumentException("Invalid date format: " + by);
     }
 
+    /**
+     * Returns the type icon representing a deadline task.
+     *
+     * @return The string "[D]" representing a deadline task.
+     */
     @Override
     public String getTypeIcon() {
         return "[D]";
     }
 
+    /**
+     * Returns the string representation of the deadline task.
+     *
+     * @return The string representation of the deadline task, including its type, status, description, and deadline.
+     */
     @Override
     public String toString() {
-        return getTypeIcon() + getStatusIcon() + " " + description + " (by: "
-                + by.format(DEFAULT_FORMATTER) + ")";
+        return getTypeIcon() + getStatusIcon() + " " + description + " (by: " + by.format(DEFAULT_FORMATTER) + ")";
     }
 
+    /**
+     * Returns the formatted string to be saved in the file.
+     *
+     * @return The formatted string to be saved in the file, representing the deadline task.
+     */
     @Override
     public String toFileString() {
         return "D | " + super.toFileString() + " | " + by.format(DEFAULT_FORMATTER);

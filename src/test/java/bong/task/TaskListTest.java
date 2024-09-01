@@ -56,7 +56,7 @@ public class TaskListTest {
         BongException exception = assertThrows(BongException.class, () -> {
             taskList.getTask(1);
         });
-        assertEquals("Invalid bong.task number!", exception.getMessage());
+        assertEquals("Invalid task number!", exception.getMessage());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TaskListTest {
         BongException exception = assertThrows(BongException.class, () -> {
             taskList.removeTask(0);
         });
-        assertEquals("Invalid bong.task number!", exception.getMessage());
+        assertEquals("Invalid task number!", exception.getMessage());
     }
 
     @Test
