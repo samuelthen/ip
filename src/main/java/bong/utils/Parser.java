@@ -17,6 +17,8 @@ public class Parser {
             return new ListCommand();
         } else if (commandWord.equals("mark")) {
             return new MarkCommand(arguments);
+        } else if (commandWord.equals("find")) {
+            return new FindCommand(arguments);
         } else if (commandWord.equals("unmark")) {
             return new UnmarkCommand(arguments);
         } else if (commandWord.equals("delete")) {
