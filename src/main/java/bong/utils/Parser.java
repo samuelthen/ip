@@ -1,12 +1,6 @@
 package bong.utils;
 
-import bong.command.AddCommand;
-import bong.command.Command;
-import bong.command.DeleteCommand;
-import bong.command.ExitCommand;
-import bong.command.ListCommand;
-import bong.command.MarkCommand;
-import bong.command.UnmarkCommand;
+import bong.command.*;
 
 import bong.task.Deadline;
 import bong.task.Event;
@@ -32,6 +26,9 @@ public class Parser {
         switch (commandWord) {
             case "bye" -> {
                 return new ExitCommand();
+            }
+            case "find" -> {
+                return new FindCommand(arguments);
             }
             case "list" -> {
                 return new ListCommand();
