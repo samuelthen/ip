@@ -24,7 +24,7 @@ public class Ui {
      */
     public void showWelcome() {
         this.showLine();
-        System.out.println("    Hello! I'm bong.Bong");
+        System.out.println("    Hello! I'm Bong");
         System.out.println("    What can I do for you?");
         this.showLine();
     }

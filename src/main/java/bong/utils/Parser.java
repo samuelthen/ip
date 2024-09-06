@@ -1,6 +1,13 @@
 package bong.utils;
 
-import bong.command.*;
+import bong.command.AddCommand;
+import bong.command.Command;
+import bong.command.DeleteCommand;
+import bong.command.ExitCommand;
+import bong.command.FindCommand;
+import bong.command.ListCommand;
+import bong.command.MarkCommand;
+import bong.command.UnmarkCommand;
 
 import bong.task.Deadline;
 import bong.task.Event;
@@ -64,7 +71,9 @@ public class Parser {
                 String to = subparts[2].trim();
                 return new AddCommand(new Event(taskDescription, from, to, false));
             }
-            default -> throw new BongException("I'm sorry, I don't understand that command.");
+            default -> {
+                throw new BongException("I'm sorry, I don't understand that command.");
+            }
         }
     }
 }
