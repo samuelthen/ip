@@ -15,7 +15,7 @@ import bong.utils.Storage;
  * to process user commands.
  */
 public class Bong {
-    private static final String FILE_PATH = "./data/bong.txt"; // Hardcoded file path
+    private static final String DEFAULT_FILE_PATH = "./data/bong.txt";
     private final Storage storage;
     private TaskList tasks;
     private final Parser parser;
@@ -26,8 +26,15 @@ public class Bong {
      * If the storage file cannot be loaded, an empty task list is initialized.
      */
     public Bong() {
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(DEFAULT_FILE_PATH);
         parser = new Parser();
+        loadTasks();
+    }
+
+    /**
+     * Loads tasks from storage or initializes an empty task list if loading fails.
+     */
+    private void loadTasks() {
         try {
             tasks = new TaskList(storage.load());
         } catch (BongException e) {
@@ -52,6 +59,9 @@ public class Bong {
             return result.getFeedbackToUser();
         } catch (BongException e) {
             return e.getMessage();
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
+            return "An error occurred.";
         }
     }
 
@@ -61,7 +71,7 @@ public class Bong {
      * @return A welcome message string.
      */
     public String showWelcomeMessage() {
-        return "    Hello! I'm Bong.\n    What can I do for you?";
+        return "Hello! I'm Bong.\nWhat can I do for you?";
     }
 
     /**

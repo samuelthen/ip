@@ -2,7 +2,6 @@ package bong;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,13 +20,11 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Bong bong;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/speaking.png"));
-    private Image bongImage = new Image(this.getClass().getResourceAsStream("/images/cool.png"));
+    private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/speaking.png"));
+    private static final Image BONG_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/cool.png"));
 
     /**
      * Initializes the main window controller.
@@ -37,17 +34,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // Show welcome message when the application starts
-        dialogContainer.getChildren().add(DialogBox.getBongDialog(new Bong().showWelcomeMessage(), bongImage));
+        dialogContainer.getChildren().add(DialogBox.getBongDialog(new Bong().showWelcomeMessage(), BONG_IMAGE));
     }
 
     /**
      * Injects the {@code Bong} instance into this controller.
      *
-     * @param d The {@code Bong} instance to be used by this controller.
+     * @param bongInstance The {@code Bong} instance to be used by this controller.
      */
-    public void setBong(Bong d) {
-        bong = d;
+    public void setBong(Bong bongInstance) {
+        this.bong = bongInstance;
     }
 
     /**
@@ -60,31 +56,59 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = bong.getResponse(input);
+        displayDialog(input, response);
 
-        // Display dialog for user input and Bong's response
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBongDialog(response, bongImage)
-        );
-
-        // Check if the user input is "bye"
-        if (input.trim().equalsIgnoreCase("bye")) {
-            // Show goodbye message
-            dialogContainer.getChildren().add(
-                    DialogBox.getBongDialog("Goodbye! Have a nice day!", bongImage)
-            );
-
-            // Close the application after a short delay
-            Platform.runLater(() -> {
-                try {
-                    Thread.sleep(2000); // Wait for 2 seconds before closing
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Platform.exit();
-            });
+        if (isExitCommand(input)) {
+            displayExitMessage();
+            scheduleExit();
         }
 
         userInput.clear();
+    }
+
+    /**
+     * Displays the user input and Bong's response in the dialog container.
+     *
+     * @param input    The user input text.
+     * @param response The response from Bong.
+     */
+    private void displayDialog(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getBongDialog(response, BONG_IMAGE)
+        );
+    }
+
+    /**
+     * Checks if the user input is an exit command.
+     *
+     * @param input The user input text.
+     * @return True if the input is "bye", otherwise false.
+     */
+    private boolean isExitCommand(String input) {
+        return input.trim().equalsIgnoreCase("bye");
+    }
+
+    /**
+     * Displays a goodbye message and schedules the application to close.
+     */
+    private void displayExitMessage() {
+        dialogContainer.getChildren().add(
+                DialogBox.getBongDialog("Goodbye! Have a nice day!", BONG_IMAGE)
+        );
+    }
+
+    /**
+     * Schedules the application to close after a short delay.
+     */
+    private void scheduleExit() {
+        Platform.runLater(() -> {
+            try {
+                Thread.sleep(2000); // Wait for 2 seconds before closing
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.exit();
+        });
     }
 }
