@@ -33,8 +33,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert USER_IMAGE != null : "User image should be loaded";
+        assert BONG_IMAGE != null : "Bong image should be loaded";
+
+        assert scrollPane != null : "ScrollPane should be initialized";
+        assert dialogContainer != null : "DialogContainer should be initialized";
+        assert userInput != null : "UserInput should be initialized";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getBongDialog(new Bong().showWelcomeMessage(), BONG_IMAGE));
+
     }
 
     /**

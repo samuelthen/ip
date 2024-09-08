@@ -60,6 +60,9 @@ public class DialogBox extends HBox {
     private void setDialogContent(String text, Image img) {
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        assert dialog != null : "Dialog label should be initialized";
+        assert displayPicture != null : "Display picture should be initialized";
     }
 
     /**
@@ -71,6 +74,9 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+
+        assert getChildren().get(0) instanceof ImageView : "First child should be an ImageView after flip";
+        assert getChildren().get(1) instanceof Label : "Second child should be a Label after flip";
     }
 
     /**
