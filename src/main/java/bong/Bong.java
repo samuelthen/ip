@@ -33,6 +33,8 @@ public class Bong {
         } catch (BongException e) {
             tasks = new TaskList();
         }
+
+        assert tasks != null : "TaskList should not be null after initialization";
     }
 
     /**
@@ -45,7 +47,10 @@ public class Bong {
     public String getResponse(String userInput) {
         try {
             Command command = parser.parseCommand(userInput);
+            assert command != null : "Parsed command should not be null";
+
             CommandResult result = command.execute(tasks);
+            assert result != null : "Command result should not be null";
             if (result.isModified()) {
                 storage.save(tasks.getList());
             }
