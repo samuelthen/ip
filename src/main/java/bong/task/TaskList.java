@@ -1,6 +1,7 @@
 package bong.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import bong.utils.BongException;
 
@@ -24,6 +25,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        sortTasks();
     }
 
     /**
@@ -33,6 +35,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+        sortTasks();
     }
 
     /**
@@ -79,5 +82,9 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
+    }
+
+    private void sortTasks() {
+        Collections.sort(tasks); // Sort tasks according to the natural order
     }
 }

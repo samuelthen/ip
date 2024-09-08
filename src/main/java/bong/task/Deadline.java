@@ -20,8 +20,8 @@ public class Deadline extends Task {
      * @param isDone Whether the task is marked as done.
      */
     public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone);
-        this.by = super.parseDateTime(by);
+        super(description, isDone, Task.parseDateTime(by));
+        this.by = Task.parseDateTime(by);
     }
 
     /**

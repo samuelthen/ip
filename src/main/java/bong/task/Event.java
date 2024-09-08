@@ -22,9 +22,9 @@ public class Event extends Task {
      * @param isDone Whether the task is marked as done.
      */
     public Event(String description, String from, String to, boolean isDone) {
-        super(description, isDone);
-        this.from = super.parseDateTime(from);
-        this.to = super.parseDateTime(to);
+        super(description, isDone, Task.parseDateTime(from));
+        this.from = Task.parseDateTime(from);
+        this.to = Task.parseDateTime(to);
     }
 
     /**
