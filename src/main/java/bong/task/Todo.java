@@ -11,7 +11,7 @@ public class Todo extends Task {
      * @param isDone The completion status of the task.
      */
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        super(description, isDone, null);
     }
 
     @Override

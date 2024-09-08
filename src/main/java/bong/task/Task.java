@@ -8,9 +8,10 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a generic task with a description and a completion status.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
+    private LocalDateTime sortingDate;
 
     private static final DateTimeFormatter[] FORMATTERS = {
             DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // e.g., "31/12/2023 2359"
@@ -31,9 +32,10 @@ public abstract class Task {
      * @param description The description of the task.
      * @param isDone The completion status of the task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, LocalDateTime sortingDate) {
         this.description = description;
         this.isDone = isDone;
+        this.sortingDate = sortingDate;
     }
 
     /**
@@ -95,7 +97,7 @@ public abstract class Task {
      * @return The parsed {@code LocalDateTime} object.
      * @throws IllegalArgumentException If the input string does not match any known date format.
      */
-    public LocalDateTime parseDateTime(String dateTimeString) {
+    public static LocalDateTime parseDateTime(String dateTimeString) {
         for (DateTimeFormatter formatter : FORMATTERS) {
             LocalDateTime localDateTime = tryParseDateTime(dateTimeString, formatter);
             if (localDateTime != null) {
@@ -105,7 +107,7 @@ public abstract class Task {
         throw new IllegalArgumentException("Invalid date format: " + dateTimeString);
     }
 
-    private LocalDateTime tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
+    private static LocalDateTime tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
         try {
             return LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeParseException e) {
@@ -120,5 +122,19 @@ public abstract class Task {
         }
 
         return null;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        if (this.sortingDate == null && other.sortingDate == null) {
+            return 0;
+        }
+        if (this.sortingDate == null) {
+            return 1;
+        }
+        if (other.sortingDate == null) {
+            return -1;
+        }
+        return this.sortingDate.compareTo(other.sortingDate);
     }
 }
