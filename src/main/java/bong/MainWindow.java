@@ -36,8 +36,15 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert userImage != null : "User image should be loaded";
+        assert bongImage != null : "Bong image should be loaded";
+
+        assert scrollPane != null : "ScrollPane should be initialized";
+        assert dialogContainer != null : "DialogContainer should be initialized";
+        assert userInput != null : "UserInput should be initialized";
+        assert sendButton != null : "SendButton should be initialized";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // Show welcome message when the application starts
         dialogContainer.getChildren().add(DialogBox.getBongDialog(new Bong().showWelcomeMessage(), bongImage));
     }
 
@@ -61,23 +68,20 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = bong.getResponse(input);
 
-        // Display dialog for user input and Bong's response
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBongDialog(response, bongImage)
         );
 
-        // Check if the user input is "bye"
         if (input.trim().equalsIgnoreCase("bye")) {
             // Show goodbye message
             dialogContainer.getChildren().add(
                     DialogBox.getBongDialog("Goodbye! Have a nice day!", bongImage)
             );
 
-            // Close the application after a short delay
             Platform.runLater(() -> {
                 try {
-                    Thread.sleep(2000); // Wait for 2 seconds before closing
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
