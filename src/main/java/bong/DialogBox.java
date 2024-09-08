@@ -33,6 +33,14 @@ public class DialogBox extends HBox {
      * @param img  The image representing the speaker's face.
      */
     private DialogBox(String text, Image img) {
+        loadFXML();
+        setDialogContent(text, img);
+    }
+
+    /**
+     * Loads the FXML layout for the dialog box.
+     */
+    private void loadFXML() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -41,12 +49,20 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Sets the text and image content for the dialog.
+     *
+     * @param text The text content to display.
+     * @param img  The image representing the speaker.
+     */
+    private void setDialogContent(String text, Image img) {
+        dialog.setText(text);
+        displayPicture.setImage(img);
 
         assert dialog != null : "Dialog label should be initialized";
         assert displayPicture != null : "Display picture should be initialized";
-
-        dialog.setText(text);
-        displayPicture.setImage(img);
     }
 
     /**
@@ -83,8 +99,8 @@ public class DialogBox extends HBox {
      * @return A new {@code DialogBox} instance representing the Bong dialog.
      */
     public static DialogBox getBongDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(text, img);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

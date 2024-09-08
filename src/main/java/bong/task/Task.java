@@ -1,11 +1,29 @@
 package bong.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a generic task with a description and a completion status.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+
+    private static final DateTimeFormatter[] FORMATTERS = {
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"),       // e.g., "31/12/2023 2359"
+            DateTimeFormatter.ofPattern("d-M-yyyy HHmm"),       // e.g., "31-12-2023 2359"
+            DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"),    // e.g., "31 Dec 2023 2359"
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),    // e.g., "2023-12-31 23:59"
+            DateTimeFormatter.ofPattern("d MMM yyyy"),          // e.g., "31 Dec 2023"
+            DateTimeFormatter.ofPattern("d/M/yyyy"),            // e.g., "31/12/2023"
+            DateTimeFormatter.ofPattern("d-M-yyyy"),            // e.g., "31-12-2023"
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"),          // e.g., "2023-12-31"
+            DateTimeFormatter.ofPattern("MMMM d, yyyy"),        // e.g., "December 31, 2023"
+            DateTimeFormatter.ofPattern("MMM d, yyyy")          // e.g., "Dec 31, 2023"
+    };
 
     /**
      * Constructs a new {@code Task} with the specified description and completion status.
@@ -68,5 +86,39 @@ public abstract class Task {
      */
     public String toFileString() {
         return (isDone ? "1" : "0") + " | " + description;
+    }
+
+    /**
+     * Parses the given date and time string into a {@code LocalDateTime} object.
+     *
+     * @param dateTimeString The date and time string to be parsed.
+     * @return The parsed {@code LocalDateTime} object.
+     * @throws IllegalArgumentException If the input string does not match any known date format.
+     */
+    public LocalDateTime parseDateTime(String dateTimeString) {
+        for (DateTimeFormatter formatter : FORMATTERS) {
+            LocalDateTime localDateTime = tryParseDateTime(dateTimeString, formatter);
+            if (localDateTime != null) {
+                return localDateTime;
+            }
+        }
+        throw new IllegalArgumentException("Invalid date format: " + dateTimeString);
+    }
+
+    private LocalDateTime tryParseDateTime(String dateTimeString, DateTimeFormatter formatter) {
+        try {
+            return LocalDateTime.parse(dateTimeString, formatter);
+        } catch (DateTimeParseException e) {
+            // Parsing failed, continue to the next format
+        }
+
+        try {
+            LocalDate date = LocalDate.parse(dateTimeString, formatter);
+            return date.atStartOfDay();
+        } catch (DateTimeParseException e) {
+            // Parsing failed, continue to the next format
+        }
+
+        return null;
     }
 }

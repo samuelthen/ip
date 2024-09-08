@@ -15,6 +15,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private static final int MIN_HEIGHT = 220;
+    private static final int MIN_WIDTH = 417;
     private Bong bong = new Bong();
 
     /**
@@ -34,8 +36,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setMinHeight(220);
-            stage.setMinWidth(417);
+            stage.setMinHeight(MIN_HEIGHT);
+            stage.setMinWidth(MIN_WIDTH);
             fxmlLoader.<MainWindow>getController().setBong(bong);  // inject the Bong instance
             stage.show();
         } catch (IOException e) {

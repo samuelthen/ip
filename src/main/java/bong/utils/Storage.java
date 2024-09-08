@@ -39,36 +39,45 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
         if (!file.exists()) {
-            new File(file.getParent()).mkdirs();
+            createFileIfNotExists(file);
             return list;
         }
+        return readTasksFromFile(file);
+    }
 
+    private void createFileIfNotExists(File file) {
+        new File(file.getParent()).mkdirs();
+    }
+
+    private ArrayList<Task> readTasksFromFile(File file) throws BongException {
+        ArrayList<Task> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(" \\| ");
-                String taskType = parts[0];
-                boolean isDone = parts[1].equals("1");
-                switch (taskType) {
-                    case "T":
-                        list.add(new Todo(parts[2], isDone));
-                        break;
-                    case "D":
-                        list.add(new Deadline(parts[2], parts[3], isDone));
-                        break;
-                    case "E":
-                        list.add(new Event(parts[2], parts[3], parts[4], isDone));
-                        break;
-                    default:
-                        System.out.println("Unrecognized bong.task format in file, skipping line: " + line);
-                        break;
+                Task task = parseTaskFromLine(line);
+                if (task != null) {
+                    list.add(task);
                 }
             }
         } catch (IOException e) {
             throw new BongException("Error loading tasks from file: " + e.getMessage());
         }
-
         return list;
+    }
+
+    private Task parseTaskFromLine(String line) throws BongException {
+        String[] parts = line.split(" \\| ");
+        String taskType = parts[0];
+        boolean isDone = parts[1].equals("1");
+        return switch (taskType) {
+            case "T" -> new Todo(parts[2], isDone);
+            case "D" -> new Deadline(parts[2], parts[3], isDone);
+            case "E" -> new Event(parts[2], parts[3], parts[4], isDone);
+            default -> {
+                System.out.println("Unrecognized task format in file, skipping line: " + line);
+                yield null;
+            }
+        };
     }
 
     /**
