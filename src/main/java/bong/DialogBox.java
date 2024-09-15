@@ -8,11 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -33,14 +33,14 @@ public class DialogBox extends HBox {
      * @param img  The image representing the speaker's face.
      */
     private DialogBox(String text, Image img) {
-        loadFXML();
+        loadFxml();
         setDialogContent(text, img);
     }
 
     /**
      * Loads the FXML layout for the dialog box.
      */
-    private void loadFXML() {
+    private void loadFxml() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);

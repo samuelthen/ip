@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -38,7 +38,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(MIN_HEIGHT);
             stage.setMinWidth(MIN_WIDTH);
-            fxmlLoader.<MainWindow>getController().setBong(bong);  // inject the Bong instance
+            fxmlLoader.<MainWindow>getController().setBong(bong); // inject the Bong instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

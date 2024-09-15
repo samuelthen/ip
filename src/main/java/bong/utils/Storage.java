@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 
 import bong.task.Deadline;
@@ -70,13 +69,13 @@ public class Storage {
         String taskType = parts[0];
         boolean isDone = parts[1].equals("1");
         return switch (taskType) {
-            case "T" -> new Todo(parts[2], isDone);
-            case "D" -> new Deadline(parts[2], parts[3], isDone);
-            case "E" -> new Event(parts[2], parts[3], parts[4], isDone);
-            default -> {
-                System.out.println("Unrecognized task format in file, skipping line: " + line);
-                yield null;
-            }
+        case "T" -> new Todo(parts[2], isDone);
+        case "D" -> new Deadline(parts[2], parts[3], isDone);
+        case "E" -> new Event(parts[2], parts[3], parts[4], isDone);
+        default -> {
+            System.out.println("Unrecognized task format in file, skipping line: " + line);
+            yield null;
+        }
         };
     }
 

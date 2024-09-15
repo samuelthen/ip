@@ -8,7 +8,6 @@ import bong.command.FindCommand;
 import bong.command.ListCommand;
 import bong.command.MarkCommand;
 import bong.command.UnmarkCommand;
-
 import bong.task.Deadline;
 import bong.task.Event;
 import bong.task.Todo;
@@ -29,6 +28,10 @@ public class Parser {
     private static final String TODO = "todo";
     private static final String DESCRIPTION_EMPTY_MSG = "The description of %s cannot be empty.";
     private static final String UNKNOWN_COMMAND_MSG = "I'm sorry, I don't understand that command.";
+    private static final String DEADLINE_BY = " /by ";
+    private static final String EVENT_FROM = " /from ";
+    private static final String EVENT_TO = " /to ";
+    private static final String BYE = "bye";
 
     /**
      * Parses the user input and returns the corresponding {@code Command} object.
@@ -43,26 +46,26 @@ public class Parser {
         String arguments = parts.length > 1 ? parts[1] : "";
 
         switch (commandWord) {
-            case "bye":
-                return new ExitCommand();
-            case FIND:
-                return new FindCommand(arguments);
-            case LIST:
-                return new ListCommand();
-            case MARK:
-                return new MarkCommand(arguments);
-            case UNMARK:
-                return new UnmarkCommand(arguments);
-            case DELETE:
-                return new DeleteCommand(arguments);
-            case TODO:
-                return createTodoCommand(arguments);
-            case DEADLINE:
-                return createDeadlineCommand(arguments);
-            case EVENT:
-                return createEventCommand(arguments);
-            default:
-                throw new BongException(UNKNOWN_COMMAND_MSG);
+        case BYE:
+            return new ExitCommand();
+        case FIND:
+            return new FindCommand(arguments);
+        case LIST:
+            return new ListCommand();
+        case MARK:
+            return new MarkCommand(arguments);
+        case UNMARK:
+            return new UnmarkCommand(arguments);
+        case DELETE:
+            return new DeleteCommand(arguments);
+        case TODO:
+            return createTodoCommand(arguments);
+        case DEADLINE:
+            return createDeadlineCommand(arguments);
+        case EVENT:
+            return createEventCommand(arguments);
+        default:
+            throw new BongException(UNKNOWN_COMMAND_MSG);
         }
     }
 
@@ -71,14 +74,14 @@ public class Parser {
     }
 
     private Command createDeadlineCommand(String arguments) throws BongException {
-        String[] subparts = arguments.split(" /by ");
+        String[] subparts = arguments.split(DEADLINE_BY);
         validateDescription(subparts[0].trim(), DEADLINE);
         String by = subparts[1].trim();
         return new AddCommand(new Deadline(subparts[0].trim(), by, false));
     }
 
     private Command createEventCommand(String arguments) throws BongException {
-        String[] subparts = arguments.split(" /from | /to ");
+        String[] subparts = arguments.split(EVENT_FROM + "|" + EVENT_TO);
         validateDescription(subparts[0].trim(), EVENT);
         String from = subparts[1].trim();
         String to = subparts[2].trim();

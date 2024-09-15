@@ -1,13 +1,12 @@
 package bong;
 
-import javafx.application.Application;
-
 import bong.command.Command;
 import bong.command.CommandResult;
 import bong.task.TaskList;
 import bong.utils.BongException;
 import bong.utils.Parser;
 import bong.utils.Storage;
+import javafx.application.Application;
 
 /**
  * The {@code Bong} class is the main entry point of the application.
@@ -80,7 +79,7 @@ public class Bong {
     }
 
     /**
-     * The main method that serves as the entry point of the application.
+     * Launches the Bong application.
      *
      * @param args Command-line arguments passed to the application.
      */

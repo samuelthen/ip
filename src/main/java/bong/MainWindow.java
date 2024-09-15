@@ -14,17 +14,19 @@ import javafx.scene.layout.VBox;
  * handling user inputs and displaying responses from Bong.
  */
 public class MainWindow extends AnchorPane {
+    // 'image: Flaticon.com'.
+    private static final Image BONG_IMAGE = new Image(MainWindow.class
+            .getResourceAsStream("/images/cool.png"));
+    private static final Image USER_IMAGE = new Image(MainWindow.class
+            .getResourceAsStream("/images/speaking.png"));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-
     private Bong bong;
-
-    private static final Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/speaking.png"));
-    private static final Image BONG_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/cool.png"));
 
     /**
      * Initializes the main window controller.
