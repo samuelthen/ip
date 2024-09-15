@@ -1,16 +1,16 @@
 package bong.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a task with a specific deadline in the Bong application.
  * Inherits from the {@code Task} class.
  */
 public class Deadline extends Task {
-    private final LocalDateTime by;
 
     private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private final LocalDateTime by;
 
     /**
      * Constructs a new {@code Deadline} task with the specified description, deadline, and status.
@@ -20,8 +20,8 @@ public class Deadline extends Task {
      * @param isDone Whether the task is marked as done.
      */
     public Deadline(String description, String by, boolean isDone) {
-        super(description, isDone, Task.parseDateTime(by));
-        this.by = Task.parseDateTime(by);
+        super(description, isDone, Task.parseDateTime(by, false));
+        this.by = Task.parseDateTime(by, false);
     }
 
     /**

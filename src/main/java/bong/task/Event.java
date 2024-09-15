@@ -1,17 +1,18 @@
 package bong.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an event task with a specific start and end time in the Bong application.
  * Inherits from the {@code Task} class.
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
 
     private static final DateTimeFormatter DEFAULT_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
     /**
      * Constructs a new {@code Event} task with the specified description, start and end time, and status.
@@ -22,9 +23,9 @@ public class Event extends Task {
      * @param isDone Whether the task is marked as done.
      */
     public Event(String description, String from, String to, boolean isDone) {
-        super(description, isDone, Task.parseDateTime(from));
-        this.from = Task.parseDateTime(from);
-        this.to = Task.parseDateTime(to);
+        super(description, isDone, Task.parseDateTime(from, true));
+        this.from = Task.parseDateTime(from, true);
+        this.to = Task.parseDateTime(to, false);
     }
 
     /**
@@ -40,7 +41,7 @@ public class Event extends Task {
     /**
      * Returns the string representation of the event task.
      *
-     * @return The string representation of the event task, including its type, status, description, start, and end time.
+     * @return The string representation of the event task (type, status, description, start, and end time).
      */
     @Override
     public String toString() {
