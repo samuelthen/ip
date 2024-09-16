@@ -70,7 +70,7 @@ public class FindCommand implements Command {
             int actualIndex = entry.getKey();
             Task task = entry.getValue();
 
-            sb.append(String.format("%d.%s %s\n", actualIndex, task.getTypeIcon(), task));
+            sb.append(String.format("%d. %s \n", actualIndex, task));
         }
         return sb.toString();
     }
