@@ -4,9 +4,6 @@
 
 Bong is a desktop app that serves as a Personal Assistant Chatbot that helps a person to keep track of various things.
 
-* Table of Contents
-  {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -60,7 +57,7 @@ Examples:
 ```
 Got it. I've added this task:
 [T][] Buy groceries
-Now you have 2 task in the list.
+Now you have 2 tasks in the list.
 ```
 
 ### Adding a deadline : `deadline`
@@ -78,7 +75,7 @@ Examples:
 ```
 Got it. I've added this task:
 [D][] SEP application (by: 29/9/2024 2359)
-Now you have 3 task in the list.
+Now you have 3 tasks in the list.
 ```
 
 ### Adding an event : `event`
@@ -96,7 +93,7 @@ Examples:
 ```
 Got it. I've added this task:
 [E][] Hackathon (from: 29/9/2024 0000 to: 20/9/2024 2359)
-Now you have 4 task in the list.
+Now you have 4 tasks in the list.
 ```
 
 ### Mark a task as done : `mark`
@@ -194,18 +191,19 @@ Bong chatbot data are saved in the hard disk automatically after any command tha
 What date and date-time format are accepted? <br>
 **A**: <br>
 Date-Time Formats:
-1. "d/M/yyyy HHmm". Example: "31/12/2023 2359"
-2. "d-M-yyyy HHmm". Example: "31-12-2023 2359"
-3. "dd MMM yyyy HHmm". Example: "31 Dec 2023 2359"
-4. "yyyy-MM-dd HHmm". Example: "2023-12-31 2359"
-5. "MMM dd yyyy HHmm". Example: "Dec 31 2023 2359"
+1. `d/M/yyyy HHmm`. Example: "31/12/2023 2359"
+2. `d-M-yyyy HHmm`. Example: "31-12-2023 2359"
+3. `dd MMM yyyy HHmm`. Example: "31 Dec 2023 2359"
+4. `yyyy-MM-dd HHmm`. Example: "2023-12-31 2359"
+5. `MMM dd yyyy HHmm`. Example: "Dec 31 2023 2359"
 
 Date-Only Formats:
-1. "d/M/yyyy". Example: "31/12/2023"
-2. "d-M-yyyy". Example: "31-12-2023"
-3. "d MMM yyyy". Example: "31 Dec 2023"
-4. "yyyy-MM-dd". Example: "2023-12-31"
-5. "MMM dd yyyy". Example: "Dec 31 2023"
+1. `d/M/yyyy`. Example: "31/12/2023"
+2. `d-M-yyyy`. Example: "31-12-2023"
+3. `d MMM yyyy`. Example: "31 Dec 2023"
+4. `yyyy-MM-dd`. Example: "2023-12-31"
+5. `MMM dd yyyy`. Example: "Dec 31 2023"
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
