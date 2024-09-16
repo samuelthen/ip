@@ -1,6 +1,6 @@
 # Bong User Guide
 
-![Ui]()
+![Ui](https://samuelthen.github.io/ip/Ui.png)
 
 Bong is a desktop app that serves as a Personal Assistant Chatbot that helps a person to keep track of various things.
 
