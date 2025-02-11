@@ -1,4 +1,4 @@
-# Bong User Guide
+# Bong User Guide 1
 
 ![Ui](https://samuelthen.github.io/ip/Ui.png)
 
